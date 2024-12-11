@@ -19,6 +19,8 @@ class Element(models.Model):
         if self.line > self.matriz.num_of_lines_m or self.column > self.matriz.num_of_columns_n:
             raise ValidationError("The element is outside the bounds of the matriz")
 
+    # Verificar se o elemento já nesta posição já existe na matriz em questão
+
     def save(self, *args, **kwargs):
         self.element_is_within_limits()
         super().save(*args, **kwargs)
