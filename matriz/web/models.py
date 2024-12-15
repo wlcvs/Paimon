@@ -6,9 +6,6 @@ class Matriz(models.Model):
     num_of_lines_m = models.IntegerField(default=0)
     num_of_columns_n = models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.name
-
 class Element(models.Model):
     matriz = models.ForeignKey(Matriz, on_delete=models.CASCADE)
     value = models.IntegerField(default=0)
@@ -24,11 +21,11 @@ class Element(models.Model):
     # Verificar se o elemento já nesta posição já existe na matriz em questão
     def there_is_already_an_element_in_this_position(self):
         if  Matriz.objects.filter(line__exact=self.line) or  Matriz.objects.filter(column__exact=self.column):
-            raise ValidationError("")
+            raise ValidationError(f"There is already an element at this position in the matriz, line: {self.line}, column: {self.column}")
         else:
             return True
 
 
     def save(self, *args, **kwargs):
-        if self.element_is_within_limits():
+        if self.element_is_within_limits() and self.there_is_already_an_element_in_this_position():
             super().save(*args, **kwargs)
