@@ -28,7 +28,6 @@ class Element(models.Model):
         else:
             return True
 
-
     def save(self, *args, **kwargs):
         if self.element_is_within_limits():
             super().save(*args, **kwargs)
