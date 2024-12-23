@@ -15,3 +15,6 @@ def detail(request, pk):
         "matriz": matriz
     }
     return render(request, "web/detail.html", context)
+
+def create(request):
+    return render(request, "web/create.html")
