@@ -1,3 +1,12 @@
 from django.contrib import admin
+from .models import Matriz, Element
 
-# Register your models here.
+class MatrizAdmin(admin.ModelAdmin):
+    pass
+
+class ElementAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Matriz, MatrizAdmin)
+admin.site.register(Element, ElementAdmin)
