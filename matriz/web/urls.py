@@ -1,9 +1,9 @@
-from django.urls import path 
+from django.urls import path
 
 from . import views
 
 urlpatterns = [
-    path("", views.index, name = "index"),
-    path("matriz/<int:pk>", views.detail, name = "detail"),
-    path("matriz/create", views.create, name = "create"),
+    path("", views.MatrizListView.as_view(), name = "matriz-list"),
+    path("matriz/create", views.MatrizCreateView.as_view(), name = "matriz-create"),
+    path("matriz/create/<int:pk>", views.MatrizCreateView.as_view(), name = "matriz-create"),
 ]

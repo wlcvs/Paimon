@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <a href="{% url 'create' %}"><button>Create a new matriz</button></a>
-    {% for matriz in matrizes %}
+    <a href="{% url 'matriz-create' %}"><button>Create a new matriz</button></a>
+    <br>
+    {% for matriz in object_list %}
         <a href="{% url 'detail' matriz.pk %}">{{ matriz.name }}</a>
     {% endfor%}
 {% endblock content %}

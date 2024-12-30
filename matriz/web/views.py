@@ -1,20 +1,20 @@
-from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import (
+    ListView,
+    CreateView,
+)
 
 from .models import Matriz
 
-def index(request):
-    matrizes = Matriz.objects.all()
-    context = {
-        "matrizes": matrizes
-    }
-    return render(request, "web/index.html", context)
+class MatrizListView(ListView):
+    model = Matriz
 
-def detail(request, pk):
-    matriz = Matriz.objects.get(pk = pk)
-    context = {
-        "matriz": matriz
-    }
-    return render(request, "web/detail.html", context)
+class MatrizCreateView(CreateView):
+    model = Matriz
+    fields = ["name", "num_of_lines_m", "num_of_columns_n"]
 
-def create(request):
-    return render(request, "web/create.html")
+    def get_success_url(self):
+        return reverse_lazy(
+            "matriz-create",
+            kwargs = {"pk": self.object.id}
+        )

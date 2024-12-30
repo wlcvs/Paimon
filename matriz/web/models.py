@@ -3,14 +3,17 @@ from django.core.exceptions import ValidationError
 
 class Matriz(models.Model):
     name = models.CharField(max_length=200, null=True)
-    num_of_lines_m = models.IntegerField(default=0)
-    num_of_columns_n = models.IntegerField(default=0)
+    num_of_lines_m = models.IntegerField()
+    num_of_columns_n = models.IntegerField()
+
+    def __str__(self):
+        return self.name
 
 class Element(models.Model):
     matriz = models.ForeignKey(Matriz, on_delete=models.CASCADE)
-    value = models.IntegerField(default=0)
-    line = models.IntegerField(default=0)
-    column = models.IntegerField(default=0)
+    value = models.FloatField()
+    line = models.IntegerField()
+    column = models.IntegerField()
 
     def element_is_within_limits(self):
         if self.line > self.matriz.num_of_lines_m or self.column > self.matriz.num_of_columns_n:
