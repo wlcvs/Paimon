@@ -3,6 +3,9 @@
   {{ form.as_p }}
   <input type="submit" value="Save Matriz">
 </form>
+{% if matriz %}
+  <p>{{ matriz.name }}</p>
+{% endif %}
 <a href="{% url 'matriz-list' %}">
   Cancel
 </a>

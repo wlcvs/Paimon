@@ -18,3 +18,9 @@ class MatrizCreateView(CreateView):
             "matriz-create",
             kwargs = {"pk": self.object.id}
         )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.object:
+            context["matriz"] = Matriz.objects.get(pk = self.object.id)
+        return context
